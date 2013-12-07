@@ -1,3 +1,4 @@
 *.pyc
 static/*
 tracker/local_settings.py
+db.sqlite3
