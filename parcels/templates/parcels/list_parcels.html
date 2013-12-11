@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+
+{% block content %}
+    {% autopaginate parcels %}
+
+    <table class="table table-striped">
+        <th>Sūtījuma numurs</th><th>Komentārs</th><th>Pievienots</th><th>Statuss</th>
+        {% for p in parcels %}
+        <tr><td>{{p.tracking_number}}</td><td>{{p.comment}}</td><td>{{p.created_dt|date:"SHORT_DATE_FORMAT"}}</td><td>{{p.last_status_entry}}</td></tr>
+        {% endfor %}
+    </table>
+
+    <div class="text-center">
+        {% paginate %}
+    </div>
+
+{% endblock %}

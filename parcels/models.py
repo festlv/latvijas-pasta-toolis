@@ -2,20 +2,25 @@ import datetime
 
 from django.db import models, IntegrityError
 from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
 from parcels.managers import ShipmentManager
-from parcels.utils import scrape_shipment_status
+from parcels.utils import scrape_shipment_status, validate_tracking_number
 
 
 class Shipment(models.Model):
     tracking_number = models.CharField(max_length=13,
-                                       validators=[MinLengthValidator(13), ])
+                                       validators=[MinLengthValidator(13),
+                                                   validate_tracking_number])
     last_check_dt = models.DateTimeField(null=True, blank=True)
-    created_dt = models.DateTimeField(null=True, blank=True)
+    created_user = models.ForeignKey(User)
+    created_dt = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     comment = models.CharField(max_length=255, blank=True)
     is_received = models.BooleanField(default=False)
 
     objects = ShipmentManager()
 
+    class Meta:
+        ordering = ['-created_dt']
     def __unicode__(self):
         return self.tracking_number
 

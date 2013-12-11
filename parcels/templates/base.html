@@ -1,0 +1,15 @@
+{% extends "base_page.html" %}
+
+{% block body %}
+<div id="wrap">
+    {% include "navbar.html" %}
+        <div class="page-header">
+          <h1>{{title|default:""}}</h1><small>{{subtitle}}</small>
+        </div>
+        {% block content %}
+
+        {% endblock %}
+</div>
+
+    {% include "footer.html" %}
+{% endblock %}

@@ -1,4 +1,7 @@
+# coding=utf-8
+import re
 from datetime import datetime
+from django.core.exceptions import ValidationError
 
 import requests
 from bs4 import BeautifulSoup
@@ -31,3 +34,14 @@ def scrape_shipment_status(tracking_number):
             entries.append({'place': place, 'event': event, 'dt': dt})
 
     return entries
+
+
+TRACKING_NO_REGEX = re.compile(r'[A-Za-z]{2}[0-9]{9}[A-Za-z]{2}')
+
+
+def validate_tracking_number(value):
+    if not TRACKING_NO_REGEX.match(value):
+        raise ValidationError("""Sūtījuma numurs ir nekorekts.
+                              Tiek pieņemti sūtījuma numuri sekojošā formātā:
+                              AA123456789BB""")
+

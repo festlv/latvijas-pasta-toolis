@@ -7,3 +7,8 @@ class ShipmentManager(models.Manager):
     def shipments_to_update(self):
         qo = models.Q(is_received=False)
         return self.filter(qo)
+
+    def user_shipments(self, user):
+        return self.filter(created_user = user)
+
+
