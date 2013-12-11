@@ -32,3 +32,16 @@ def add_parcel(request):
 
     data['formset'] = formset
     return render(request, 'parcels/add_parcel.html', data)
+
+
+def search_parcels(request):
+    data = {'title': u'Meklēšana'}
+    search_term = request.GET.get('q')
+
+    parcels = Shipment.objects.search_shipments(request.user, search_term)
+    data['parcels'] = parcels
+    return render(request, 'parcels/list_parcels.html', data)
+
+
+
+
