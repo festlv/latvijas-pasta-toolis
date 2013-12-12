@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <p>Šis tūlis ir radies, lai apmierinātu vienkāršu vajadzību- kad varēs doties uz 
+        Latvijas Pastu pēc sūtījumiem no tālām zemēm.<br/>
+
+        Ievadot sūtījumu numurus, tas tiks regulāri (reizi pāris stundās) pārbaudīts 
+        <a href="http://www.pasts.lv/lv/uzzinas/meklet_sutijumu.html">Latvijas Pasta lapā</a>, 
+        un visu sūtījumu stāvoklis tiek attēlots vienuviet.</p>
+
+        <p>Drīzumā tiks pievienota arī iespēja saņemt paziņojumus uz e-pastu par 
+        sūtījuma ienākšanu Latvijā, kā arī uzaicinājuma saņemšanu</p>
+
+        <p>Šīs vietnes pirmkods ir pieejams: ___LINKS___</p>
+
+        <h3>Kāpēc šāds tūlis ir vajadzīgs? Kad atnāks tad atnāks!</h3>
+        <ol>
+            <li>
+                Sen nebiju neko rakstījis iekš <a href="https://www.djangoproject.com">Django</a>.
+            </li>
+            <li>
+                Ir labi zināt, kad pienāks pārējie sūtījumi, lai uz pasta nodaļu varētu iet tikai vienreiz.
+            </li>
+            <li>
+                Dažreiz pastnieki ignorē adresi formā: Vārds Uzvārds, SIA "Firma", un uzaicinājumi adresātu nesasniedz. 
+            </li>
+        </ol>
+
+        <h3>Cik bieži tiek pārbaudīts sūtījumu stāvoklis?</h3>
+        <p><code>* */4 * * * manage.py update_shipments</code></p>
+
+        <h3>Kāpēc sūtījuma statuss nerādās?</h3>
+        <p>Tas droši vien nav sasniedzis Latviju. Vai arī šeit kaut kas ir atsprādzis. 
+        Ja dati par sūtījumu parādās <a href="http://www.pasts.lv/lv/uzzinas/meklet_sutijumu.html">Latvijas Pasta lapā</a>, 
+        bet neparādās šeit- lūdzu sazinies ar mani.</p>
+
+        <h3>Vai tas ir droši?</h3>
+        <p>Ja izdomā veidu, kā ar sūtījuma numuru var tikt pie paša sūtījuma- droši padalies ar šo informāciju ar mani, kontakti footerī ;)</p>
+
+        <h3>Man nav sūtījuma numura!?!</h3>
+        <p>Nevaru palīdzēt.</p>
+
+    </div>
+
+{% endblock %}
+

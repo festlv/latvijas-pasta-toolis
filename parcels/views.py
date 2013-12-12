@@ -13,6 +13,11 @@ def list_parcels(request):
     return render(request, 'parcels/list_parcels.html', data)
 
 
+def index(request):
+    data = {'active_cat': 'index', 'title': u'Par pasts.wot.lv'}
+    return render(request, 'index.html', data)
+
+
 def add_parcel(request):
     data = {'title': u'Pievienot sūtījumu'}
     data['active_cat'] = 'add_parcel'

@@ -37,9 +37,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'parcels',
+    'registration',
+    'lp_registration',
     'pagination',
+    'parcels',
 )
+LOGIN_URL = 'registration_register'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+AUTHENTICATION_BACKENDS = (
+    'lp_registration.auth.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +102,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 try:
     from local_settings import *
