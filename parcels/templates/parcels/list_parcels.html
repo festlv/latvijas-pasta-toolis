@@ -16,7 +16,12 @@
     <table class="table table-striped">
         <th>Sūtījuma numurs</th><th>Komentārs</th><th>Pievienots</th><th>Statuss</th>
         {% for p in parcels %}
-        <tr><td>{{p.tracking_number}}</td><td>{{p.comment}}</td><td>{{p.created_dt|date:"SHORT_DATE_FORMAT"}}</td><td>{{p.last_status_entry}}</td></tr>
+        <tr>
+            <td><a href="{{p.get_absolute_url}}">{{p.tracking_number}}</a></td>
+            <td>{{p.comment}}</td>
+            <td>{{p.created_dt|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{p.last_status_entry|default:"-"}}</td>
+        </tr>
         {% endfor %}
     </table>
 

@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models, IntegrityError
 from django.core.validators import MinLengthValidator
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from parcels.managers import ShipmentManager
 from parcels.utils import scrape_shipment_status, validate_tracking_number
@@ -24,6 +25,9 @@ class Shipment(models.Model):
 
     def __unicode__(self):
         return self.tracking_number
+
+    def get_absolute_url(self):
+        return reverse('single_shipment', args=[str(self.id)])
 
     def update(self):
         results = scrape_shipment_status(self.tracking_number)

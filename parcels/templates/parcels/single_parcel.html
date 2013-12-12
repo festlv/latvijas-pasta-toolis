@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+        <p><label>Sūtījuma numurs:</label> {{parcel}}</p>
+            {% if parcel.comment %}
+                <p><label>Komentārs par sūtījumu:</label> {{parcel.comment}}
+            {% endif %}
+
+            <p><label>Informācija atjaunota:</label> {{parcel.last_check_dt|date:"SHORT_DATETIME_FORMAT"}}</p>
+
+
+        <div class="list-group">
+
+            
+            {% for status in parcel.statusentry_set.all %}
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading">{{status.event_dt|date:"SHORT_DATETIME_FORMAT"}} - {{status.place}}</h4>
+                    <p class="list-group-item-text">{{status.status}}</p>
+                </div>
+
+            {% empty %}
+            <p>Informācijas par šo sūtījumu nav.</p>
+            {% endfor %}
+        </div>
+</div>
+
+{% endblock %}
