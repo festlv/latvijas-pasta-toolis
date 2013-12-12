@@ -33,3 +33,6 @@ body {
 .form-inline .form-control.comment {
     width: 500px;
 }
+.add-button {
+    margin: 10px;
+}

@@ -4,6 +4,15 @@
 {% block content %}
     {% autopaginate parcels %}
 
+    {% if request.user.is_authenticated %}
+        <div class="row add-button">
+            <div class="col-md-3 col-md-offset-8">
+            <a href="{% url "parcels.views.add_parcel" %}" class="btn btn-default">Pievienot sūtījumu</a>
+        </div>
+        </div>
+
+    {% endif %}
+
     <table class="table table-striped">
         <th>Sūtījuma numurs</th><th>Komentārs</th><th>Pievienots</th><th>Statuss</th>
         {% for p in parcels %}
