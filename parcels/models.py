@@ -21,6 +21,7 @@ class Shipment(models.Model):
 
     class Meta:
         ordering = ['-created_dt']
+
     def __unicode__(self):
         return self.tracking_number
 

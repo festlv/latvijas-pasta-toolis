@@ -31,6 +31,7 @@ def add_parcel(request):
             for obj in objs:
                 obj.created_user = request.user
                 obj.save()
+                obj.update()
             return redirect('list_parcels')
     else:
         formset = ShipmentFormSet(queryset=Shipment.objects.none())
