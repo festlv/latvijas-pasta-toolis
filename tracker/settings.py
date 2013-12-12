@@ -89,7 +89,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'lv-LV'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Riga'
 
 USE_I18N = True
 
