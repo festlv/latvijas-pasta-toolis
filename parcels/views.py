@@ -1,9 +1,10 @@
 # coding=utf-8
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from parcels.models import Shipment
 from parcels.forms import ShipmentFormSet
 
-
+@login_required
 def list_parcels(request):
     data = {'title': u'Sūtījumi'}
     parcels = Shipment.objects.user_shipments(request.user)
@@ -18,6 +19,7 @@ def index(request):
     return render(request, 'index.html', data)
 
 
+@login_required
 def add_parcel(request):
     data = {'title': u'Pievienot sūtījumu'}
     data['active_cat'] = 'add_parcel'
@@ -40,6 +42,7 @@ def add_parcel(request):
     return render(request, 'parcels/add_parcel.html', data)
 
 
+@login_required
 def search_parcels(request):
     data = {'title': u'Meklēšana'}
     search_term = request.GET.get('q')
@@ -48,6 +51,8 @@ def search_parcels(request):
     data['parcels'] = parcels
     return render(request, 'parcels/list_parcels.html', data)
 
+
+@login_required
 def shipment_info(request, shipment_id):
     parcel = get_object_or_404(
         Shipment, created_user=request.user, pk=shipment_id
