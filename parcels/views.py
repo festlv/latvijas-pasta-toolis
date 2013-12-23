@@ -2,7 +2,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from parcels.models import Shipment
-from parcels.forms import ShipmentFormSet
+from parcels.forms import ShipmentFormSet, ShipmentEditForm
+from django.contrib import messages
+
 
 @login_required
 def list_parcels(request):
@@ -62,3 +64,29 @@ def shipment_info(request, shipment_id):
             'parcel': parcel}
 
     return render(request, 'parcels/single_parcel.html', data)
+
+
+@login_required
+def shipment_edit(request, shipment_id):
+    parcel = get_object_or_404(
+        Shipment, created_user=request.user, pk=shipment_id
+    )
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            parcel.delete()
+            messages.add_message(
+                request, messages.SUCCESS, u"Sūtījums ir izdzēsts")
+            return redirect('list_parcels')
+        else:
+            form = ShipmentEditForm(instance=parcel, data=request.POST)
+            if form.is_valid():
+                form.save()
+                messages.add_message(
+                    request, messages.SUCCESS, u"Sūtījums izlabots")
+                return redirect("single_shipment", shipment_id=parcel.pk)
+
+    else:
+        form = ShipmentEditForm(instance=parcel)
+
+    data = {'form': form, 'parcel': parcel, 'title': u"Labot/dzēst sūtījumu"}
+    return render(request, 'parcels/edit_parcel.html', data)

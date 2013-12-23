@@ -19,6 +19,21 @@ class DivErrorList(ErrorList):
         ])
 
 
+class ShipmentEditForm(ModelForm):
+    comment = forms.CharField(
+        label='Komentārs', required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control comment'
+            }
+        )
+    )
+
+    class Meta:
+        model = Shipment
+        fields = ['comment', ]
+
+
 class ShipmentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs['error_class'] = DivErrorList
@@ -46,5 +61,6 @@ class ShipmentForm(ModelForm):
     class Meta:
         model = Shipment
         fields = ['tracking_number', 'comment']
+
 
 ShipmentFormSet = modelformset_factory(Shipment, form=ShipmentForm, extra=5)
