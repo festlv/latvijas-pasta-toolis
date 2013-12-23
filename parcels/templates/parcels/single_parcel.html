@@ -24,6 +24,7 @@
             <p>Informācijas par šo sūtījumu nav.</p>
             {% endfor %}
         </div>
+        <a href="{% url "edit_shipment" parcel.pk %}" class="btn btn-default" role="button">Labot/dzēst</a>
 </div>
 
 {% endblock %}
