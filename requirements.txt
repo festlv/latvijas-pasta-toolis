@@ -1,7 +1,9 @@
 Django==1.6
 South==0.8.3
 beautifulsoup4==4.3.2
+django-debug-toolbar==1.0
 django-pagination==1.0.7
 django-registration==1.0
 requests==2.0.1
+sqlparse==0.1.10
 wsgiref==0.1.2

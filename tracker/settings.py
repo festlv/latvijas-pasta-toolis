@@ -41,8 +41,12 @@ INSTALLED_APPS = (
     'lp_registration',
     'pagination',
     'parcels',
+    'debug_toolbar',
 )
 LOGIN_URL = 'registration_register'
+
+FROM_EMAIL = 'pasts@wot.lv'
+SITE_URL = 'http://pasts.wot.lv/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTHENTICATION_BACKENDS = (

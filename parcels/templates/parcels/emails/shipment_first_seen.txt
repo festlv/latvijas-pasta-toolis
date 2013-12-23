@@ -1,0 +1,5 @@
+Latvijā pirmo reizi ieraudzīts sūtījums: {{shipment}}, {{shipment.comment}}.
+Pašreizējais statuss: {{status_entry}}
+Saite uz informāciju par šo sūtījumu: {{shipment.get_absolute_url}}
+
+- pasts.wot.lv

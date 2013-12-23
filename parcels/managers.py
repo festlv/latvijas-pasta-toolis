@@ -8,7 +8,8 @@ class ShipmentManager(models.Manager):
         return self.filter(qo)
 
     def user_shipments(self, user):
-        return self.filter(created_user=user)
+        return self.filter(created_user=user).\
+            prefetch_related('statusentry_set')
 
     def search_shipments(self, user, q):
         qo = models.Q(created_user=user) & \
