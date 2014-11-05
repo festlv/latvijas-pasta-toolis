@@ -12,31 +12,39 @@ import requests
 from bs4 import BeautifulSoup
 
 
-WS_URL = 'http://ws.pasts.lv/webtracking/index?empty=1&lang=lv'
+WS_URL = 'http://www.pasts.lv/lv/kategorija/sutijumu_sekosana/'
 
 
 def scrape_shipment_status(tracking_number):
 
-    payload = {'webTrackingForm[fid]': tracking_number, 'yt0': 'Nosutit'}
+    payload = {'id': tracking_number}
 
-    req = requests.post(WS_URL, payload)
+    req = requests.get(WS_URL, params=payload)
     req.encoding = 'utf8'
+
     if not req.ok:
         raise Exception(
             "Non-200 response from ws.pasts.lv for %s" % tracking_number)
     bs = BeautifulSoup(req.text)
 
     entries = []
-    for tr in bs.table.findAll('tr'):
-        if tr.td:
-            tds = tr.findAll('td')
-            try:
-                dt = datetime.strptime(tds[0].text, "%d.%m.%Y %H:%M:%S")
-            except (TypeError, UnicodeEncodeError):
-                continue
-            place = tds[2].text
-            event = tds[3].text
-            entries.append({'place': place, 'event': event, 'dt': dt})
+
+    delivery_entries = bs.find_all('table', class_='delivery')
+
+    for e in delivery_entries:
+        time_data = e.find('td', class_='time')
+        place_data = e.find('td', class_='place')
+        status_data = e.find('td', class_='status')
+
+        place = place_data.text.strip()
+        status = status_data.text.strip()
+
+        try:
+            dt = datetime.strptime(time_data.text.strip(), "%H:%M %d.%m.%Y")
+        except (TypeError, UnicodeEncodeError):
+            dt = datetime.datetime.now()
+
+        entries.append({'place': place, 'event': status, 'dt': dt})
 
     return entries
 
