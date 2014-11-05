@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 LOGIN_URL = 'registration_register'
 
 FROM_EMAIL = 'pasts@wot.lv'
-SITE_URL = 'http://pasts.wot.lv/'
+SITE_URL = 'http://pasts.wot.lv'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTHENTICATION_BACKENDS = (
@@ -61,8 +61,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pagination.middleware.PaginationMiddleware',
-#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",

@@ -3,7 +3,6 @@ import re
 from datetime import datetime
 
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import set_script_prefix
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -64,10 +63,10 @@ def post_statusentry_create(sender, **kwargs):
        kwargs['instance'].shipment.statusentry_set.all().count() == 1:
         user = kwargs['instance'].shipment.created_user
         subject = "Sūtījums ienācis LV | pasts.wot.lv"
-
-        set_script_prefix(settings.SITE_URL)
+        url = settings.SITE_URL
         content = render_to_string('parcels/emails/shipment_first_seen.txt',
                                    {'shipment': kwargs['instance'].shipment,
-                                    'status_entry': kwargs['instance']})
+                                    'status_entry': kwargs['instance'],
+                                    'site_url': url})
         send_mail(subject, content, settings.FROM_EMAIL, [user.email],
                   fail_silently=False)
