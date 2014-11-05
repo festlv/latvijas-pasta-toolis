@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="container">
+        <p class="text-center" style="float: left; padding-right: 30px;">
+            <a href="{% static "img/screenshot.png" %}">
+                <img src="{% static "img/screenshot.png" %}" alt="Screenshot" 
+                    width="500" class="img-rounded" /></a>
+        </p>
+
         <p>Šis tūlis ir radies, lai apmierinātu vienkāršu vajadzību- kad varēs doties uz 
         Latvijas Pastu pēc sūtījumiem no tālām zemēm.<br/>
 
