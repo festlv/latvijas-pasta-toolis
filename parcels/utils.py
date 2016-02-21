@@ -10,13 +10,17 @@ from django.template.loader import render_to_string
 import requests
 from bs4 import BeautifulSoup
 
-
-WS_URL = 'http://www.pasts.lv/lv/kategorija/sutijumu_sekosana/'
+#Example URL: https://track.pasts.lv/consignment/tracking?type=pastsLv&lang=lv&id=RF260227722SG&type=pastsLv&lang=lv
+WS_URL = 'https://track.pasts.lv/consignment/tracking'
 
 
 def scrape_shipment_status(tracking_number):
 
-    payload = {'id': tracking_number}
+    payload = {
+        'id': tracking_number,
+        'type': 'pastsLv',
+        'lang': 'lv'
+    }
 
     req = requests.get(WS_URL, params=payload)
     req.encoding = 'utf8'

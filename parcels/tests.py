@@ -21,10 +21,10 @@ class ScraperTestCase(TestCase):
         Shipment.objects.all().delete()
 
     def test_known_value(self):
-        shipment_no = 'RF260227722SG'
+        shipment_no = 'RI851080089CN'
         results = scrape_shipment_status(shipment_no)
 
-        self.assertEqual(len(results), 8)
+        self.assertEqual(len(results), 6)
 
     def test_shipments_to_update(self):
         s = self._create_shipment('RB867569192CN')
@@ -32,12 +32,12 @@ class ScraperTestCase(TestCase):
         self.assertIn(s, shipments_to_update)
 
     def test_status_entries(self):
-        s = self._create_shipment('RF260227722SG')
+        s = self._create_shipment('RI851080089CN')
         s.update()
 
         self.assertGreater(s.statusentry_set.count(), 0)
 
     def test_shipment_delivered(self):
-        s = self._create_shipment('RF260227722SG')
+        s = self._create_shipment('RI851080089CN')
         s.update()
         self.assertTrue(s.is_received)
